@@ -11,6 +11,9 @@
  * <em>Hint: Use a lookup table, but don't use 2^64 entries!</em>
  * </p>
  * 
+ * <p>
+ * <em>Solution:</em> need to process multiple bits at once and cache results: cache result of parity check on 16 bit words (so 4 results per 64 bit word) and then calculate the total parity
+ * 
  * @author Brandon Tarney
  * @version 1.0
  */
@@ -21,7 +24,7 @@ public class Problem5_1 {
 	
 	
 	static public void main (String[] args) {
-		//TODO write main class
+		//TODO write the solution in C since bit manipulation is not a strength of java
 	}
 
 }

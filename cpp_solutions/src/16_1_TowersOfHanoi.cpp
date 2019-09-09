@@ -7,22 +7,49 @@
 	*/
 
 #include <iostream>
+#include <vector>
+#include <deque>
 
 using namespace std;
 
 class TowersOfHanoi
 {
 	public:
-		static void transferNRings(const int numRings);
+
+		static void computeTowersHanoiSteps(const int numRings, vector< deque<int> > & pegs, int fromPeg, int toPeg, int usePeg);
 };
 
-void TowersOfHanoi::transferNRings(const int numRings)
+
+void TowersOfHanoi::computeTowersHanoiSteps(const int numRings, vector< deque<int> > & pegs, int fromPeg, int toPeg, int usePeg)
 {
-	//TODO
+	if (numRings > 0)
+	{
+		TowersOfHanoi::computeTowersHanoiSteps(numRings-1, pegs, fromPeg, usePeg, toPeg);
+		pegs[toPeg].push_front(pegs[fromPeg].front());
+		pegs[fromPeg].pop_front();
+		cout<<"Move from peg "<<fromPeg<<" to peg " <<toPeg<<endl;
+		TowersOfHanoi::computeTowersHanoiSteps(numRings-1, pegs, usePeg, toPeg, fromPeg);
+	}
 }
+
+
 
 int main()
 {
 	cout<<"Print TowersOfHanoi"<<endl;
+	const int numPegs = 3;
+	const int numRings = 3;
+	vector< deque<int> > pegs;
+	for (int i = 0; i < numPegs; i++)
+	{
+		deque<int> aPeg;
+		pegs.push_back( aPeg );
+	}
+
+	for (int i = numRings; i >= 1; --i)
+	{
+		pegs.front().push_back(i);
+	}
+	TowersOfHanoi::computeTowersHanoiSteps(numRings, pegs, 0, 2, 1);
 	return (0);
 }
